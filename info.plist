@@ -152,30 +152,59 @@
 				<integer>68</integer>
 				<key>script</key>
 				<string>on run argv
-  set theQuery to item 1 of argv
+	set theQuery to item 1 of argv
 	set query to theQuery as text
-    set astid to AppleScript's text item delimiters
-    set AppleScript's text item delimiters to {","}
-    set filePath to text item 1 of query
-    set appName to text item 2 of query
-    set AppleScript's text item delimiters to astid
-    
-    try
-        set theApp to appName as text
-        using terms from application "Visual Studio Code"
-            tell application theApp
-                activate
-                open POSIX file filePath
-			    delay 2
-				activate
+	set astid to AppleScript's text item delimiters
+	set AppleScript's text item delimiters to {","}
+	set targetPath to text item 1 of query
+	set appName to text item 2 of query
+	set AppleScript's text item delimiters to astid
+	 set processMap to {{"Code", "Code"}, {"IDEA", "IntelliJ IDEA"}, {"PyCharm", "PyCharm"}, {"WebStorm", "WebStorm"}, {"CLion", "CLion"}, {"GoLand", "GoLand"}, {"Fleet", "Fleet"}, {"AppCode", "AppCode"}, {"Rider", "Rider"}, {"RubyMine", "RubyMine"}, {"PhpStorm", "PhpStorm"}, {"AndroidStudio", "Android Studio"}}
+    set processName to getProcessName(appName, processMap)
+    set targetFolder to do shell script "basename " &amp; quoted form of targetPath
+    log "targetFolder: " &amp; targetFolder
+    log "targetPath: " &amp; targetPath
+    log "processName: " &amp; processName
+    checkAndOpenFolder(appName, processName, targetFolder, targetPath, 3)
+end run
+
+on getProcessName(appName, processMap)
+    set processName to ""
+    repeat with processItem in processMap
+        set shortName to item 1 of processItem
+        set fullName to item 2 of processItem
+        if appName contains shortName then
+            set processName to fullName
+            exit repeat
+        end if
+    end repeat
+    return processName
+end getProcessName
+
+on checkAndOpenFolder(appName, processName, targetFolder, targetPath, maxRetries)
+    repeat maxRetries times
+        try
+            tell application "System Events"
+                if exists process processName then
+                    tell process processName
+                        set frontmost to true
+                        repeat with theWindow in windows
+                            if title of theWindow contains targetFolder then
+                                perform action "AXRaise" of theWindow
+                                return
+                            end if
+                        end repeat
+                        tell application appName to open targetPath
+                        return
+                    end tell
+                end if
             end tell
-        end using terms from
-        log "Successfully opened with path: " &amp; filePath
-    on error errMsg
-        log "Error: " &amp; errMsg
-        display dialog "Error opening file: " &amp; errMsg buttons {"OK"} default button "OK"
-    end try
-end run</string>
+        on error errMsg
+            delay 0.5
+        end try
+    end repeat
+    tell application appName to open targetPath
+end checkAndOpenFolder</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
