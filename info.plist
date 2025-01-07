@@ -1,0 +1,696 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>bundleid</key>
+	<string>com.gp.openByAlfred</string>
+	<key>connections</key>
+	<dict>
+		<key>00F0ADC8-688F-439C-AB53-C2E4EA1E59D6</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>B729B4A6-EA4A-455E-B948-F2ADD892C808</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>1A2009A3-F232-44E6-981C-702D95C66490</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>40FEE1DE-4913-41C5-B8BC-FCBBF58C0DEC</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>3EFBA077-6C57-45A7-8028-A2394BB2E1D3</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>1A2009A3-F232-44E6-981C-702D95C66490</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>C8F71183-39A6-4E9A-B220-5B527E7F2D48</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>CBD343D1-1736-4418-B8D9-80A60D4E10DE</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>CBD343D1-1736-4418-B8D9-80A60D4E10DE</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>00F0ADC8-688F-439C-AB53-C2E4EA1E59D6</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>3EFBA077-6C57-45A7-8028-A2394BB2E1D3</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string>reveal in Finder</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+	</dict>
+	<key>createdby</key>
+	<string>gp</string>
+	<key>description</key>
+	<string>open projects by alfred</string>
+	<key>disabled</key>
+	<false/>
+	<key>name</key>
+	<string>workspace-manager</string>
+	<key>objects</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>keyword</key>
+				<string>{var:key1}||{var:key2}||{var:key3}||{var:key4}||{var:key5}||{var:key6}</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string></string>
+				<key>script</key>
+				<string>query=$1
+
+./py3.sh list.py "$query"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string></string>
+				<key>type</key>
+				<integer>0</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>CBD343D1-1736-4418-B8D9-80A60D4E10DE</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>68</integer>
+				<key>script</key>
+				<string>on run argv
+  set theQuery to item 1 of argv
+	set query to theQuery as text
+    set astid to AppleScript's text item delimiters
+    set AppleScript's text item delimiters to {","}
+    set filePath to text item 1 of query
+    set appName to text item 2 of query
+    set AppleScript's text item delimiters to astid
+    
+    try
+        set theApp to appName as text
+        using terms from application "Visual Studio Code"
+            tell application theApp
+                activate
+                open POSIX file filePath
+            end tell
+        end using terms from
+        log "Successfully opened with path: " &amp; filePath
+    on error errMsg
+        log "Error: " &amp; errMsg
+        display dialog "Error opening file: " &amp; errMsg buttons {"OK"} default button "OK"
+    end try
+end run</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>6</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>B729B4A6-EA4A-455E-B948-F2ADD892C808</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>availableviaurlhandler</key>
+				<true/>
+				<key>triggerid</key>
+				<string>*ifdir</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.external</string>
+			<key>uid</key>
+			<string>C8F71183-39A6-4E9A-B220-5B527E7F2D48</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string>{query}</string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>00F0ADC8-688F-439C-AB53-C2E4EA1E59D6</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>path</key>
+				<string>{query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.revealfile</string>
+			<key>uid</key>
+			<string>40FEE1DE-4913-41C5-B8BC-FCBBF58C0DEC</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string>{var:split1}</string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>1A2009A3-F232-44E6-981C-702D95C66490</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>delimiter</key>
+				<string>,</string>
+				<key>discardemptyarguments</key>
+				<false/>
+				<key>outputas</key>
+				<integer>0</integer>
+				<key>trimarguments</key>
+				<false/>
+				<key>variableprefix</key>
+				<string>split</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.split</string>
+			<key>uid</key>
+			<string>3EFBA077-6C57-45A7-8028-A2394BB2E1D3</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+	</array>
+	<key>readme</key>
+	<string># Workspace Manager Alfred Workflow
+
+A powerful Alfred workflow that allows you to quickly open projects in different IDEs.
+
+## Features
+
+- Support multiple workspace directories
+- Multiple IDE configurations (up to 6)
+- Exclude specific folders
+- Fuzzy search project names
+- Hold Command key to reveal in Finder
+
+## Configuration
+
+### Environment Variables
+
+1. `workspace`: Workspace paths (comma-separated) Example: `~/Projects,~/Work`
+
+2. `exclude`: Folders to exclude (comma-separated) Example: `node_modules,target,.git`
+
+3. IDE Configuration (up to 6):
+   - `key1` - `key6`: Trigger keywords
+   - `app1` - `app6`: Corresponding application paths
+
+&gt; Note: You can configure any IDE, but custom icons are only available for the IDEs listed in the "Supported IDEs" section.
+
+Configuration example:
+
+```
+key1: vs
+app1: /Applications/Visual Studio Code.app
+
+key2: ij
+app2: /Applications/IntelliJ IDEA.app
+```
+
+## Usage
+
+1. Type the configured keyword (e.g., `vs`) in Alfred
+2. Enter project name to search
+3. Press Enter to open the selected project in the corresponding IDE
+4. Hold Command while selecting to reveal in Finder
+
+## Supported IDEs
+
+The workflow includes icons for:
+
+- Visual Studio Code
+- IntelliJ IDEA (Ultimate &amp; Community)
+- PyCharm (Professional &amp; Community)
+- WebStorm
+- PhpStorm
+- CLion
+- GoLand
+- Fleet
+- Rider
+- RustRover
+
+## Installation
+
+1. Download the workflow
+2. Double click to install in Alfred
+3. Configure workspace paths and IDE settings in workflow configuration
+4. Start using with configured keywords</string>
+	<key>uidata</key>
+	<dict>
+		<key>00F0ADC8-688F-439C-AB53-C2E4EA1E59D6</key>
+		<dict>
+			<key>xpos</key>
+			<real>605</real>
+			<key>ypos</key>
+			<real>265</real>
+		</dict>
+		<key>1A2009A3-F232-44E6-981C-702D95C66490</key>
+		<dict>
+			<key>xpos</key>
+			<real>605</real>
+			<key>ypos</key>
+			<real>395</real>
+		</dict>
+		<key>3EFBA077-6C57-45A7-8028-A2394BB2E1D3</key>
+		<dict>
+			<key>xpos</key>
+			<real>480</real>
+			<key>ypos</key>
+			<real>395</real>
+		</dict>
+		<key>40FEE1DE-4913-41C5-B8BC-FCBBF58C0DEC</key>
+		<dict>
+			<key>xpos</key>
+			<real>765</real>
+			<key>ypos</key>
+			<real>365</real>
+		</dict>
+		<key>B729B4A6-EA4A-455E-B948-F2ADD892C808</key>
+		<dict>
+			<key>xpos</key>
+			<real>765</real>
+			<key>ypos</key>
+			<real>235</real>
+		</dict>
+		<key>C8F71183-39A6-4E9A-B220-5B527E7F2D48</key>
+		<dict>
+			<key>xpos</key>
+			<real>35</real>
+			<key>ypos</key>
+			<real>235</real>
+		</dict>
+		<key>CBD343D1-1736-4418-B8D9-80A60D4E10DE</key>
+		<dict>
+			<key>xpos</key>
+			<real>245</real>
+			<key>ypos</key>
+			<real>235</real>
+		</dict>
+	</dict>
+	<key>userconfigurationconfig</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string></string>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<true/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>workspace</string>
+			<key>label</key>
+			<string>workspace</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>workspace</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string></string>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<false/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>the folder you want to exclude</string>
+			<key>label</key>
+			<string>exclude</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>exclude</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>vs</string>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<true/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string></string>
+			<key>label</key>
+			<string>keyword1</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>key1</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>Visual Studio Code</string>
+				<key>filtermode</key>
+				<integer>2</integer>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>the keyword you want to trigger and The app you want keyword1 to open</string>
+			<key>label</key>
+			<string>app1</string>
+			<key>type</key>
+			<string>filepicker</string>
+			<key>variable</key>
+			<string>app1</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>ws</string>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<true/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string></string>
+			<key>label</key>
+			<string>keyword2</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>key2</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>WebStorm</string>
+				<key>filtermode</key>
+				<integer>2</integer>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>the keyword2 you want to trigger and The app you want keyword2 to open</string>
+			<key>label</key>
+			<string>app2</string>
+			<key>type</key>
+			<string>filepicker</string>
+			<key>variable</key>
+			<string>app2</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>ij</string>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<true/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string></string>
+			<key>label</key>
+			<string>keyword3</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>key3</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>IntelliJ IDEA Ultimate</string>
+				<key>filtermode</key>
+				<integer>1</integer>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>the keyword3 you want to trigger and The app you want keyword3 to open</string>
+			<key>label</key>
+			<string>app3</string>
+			<key>type</key>
+			<string>filepicker</string>
+			<key>variable</key>
+			<string>app3</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>go</string>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<false/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string></string>
+			<key>label</key>
+			<string>keyword4</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>key4</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>GoLand</string>
+				<key>filtermode</key>
+				<integer>2</integer>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>the keyword4 you want to trigger and The app you want keyword4 to open</string>
+			<key>label</key>
+			<string>app4</string>
+			<key>type</key>
+			<string>filepicker</string>
+			<key>variable</key>
+			<string>app4</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>rr</string>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<false/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string></string>
+			<key>label</key>
+			<string>keyword5</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>key5</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>RustRover</string>
+				<key>filtermode</key>
+				<integer>2</integer>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>the keyword5 you want to trigger and The app you want keyword5 to open</string>
+			<key>label</key>
+			<string>app5</string>
+			<key>type</key>
+			<string>filepicker</string>
+			<key>variable</key>
+			<string>app5</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>pc</string>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<false/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string></string>
+			<key>label</key>
+			<string>keyword6</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>key6</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>PyCharm Professional Edition</string>
+				<key>filtermode</key>
+				<integer>2</integer>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>the keyword6 you want to trigger and The app you want keyword6 to open</string>
+			<key>label</key>
+			<string>app6</string>
+			<key>type</key>
+			<string>filepicker</string>
+			<key>variable</key>
+			<string>app6</string>
+		</dict>
+	</array>
+	<key>variablesdontexport</key>
+	<array/>
+	<key>version</key>
+	<string>1.0.0</string>
+	<key>webaddress</key>
+	<string></string>
+</dict>
+</plist>
