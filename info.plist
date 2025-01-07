@@ -165,44 +165,72 @@
     log "targetFolder: " &amp; targetFolder
     log "targetPath: " &amp; targetPath
     log "processName: " &amp; processName
-    checkAndOpenFolder(appName, processName, targetFolder, targetPath, 3)
+    checkAndOpenFolder(appName, processName, targetFolder, targetPath, 2)
 end run
 
 on getProcessName(appName, processMap)
     set processName to ""
     repeat with processItem in processMap
-        set shortName to item 1 of processItem
-        set fullName to item 2 of processItem
-        if appName contains shortName then
-            set processName to fullName
-            exit repeat
+        if appName contains item 1 of processItem then
+            return item 2 of processItem
         end if
     end repeat
     return processName
 end getProcessName
 
 on checkAndOpenFolder(appName, processName, targetFolder, targetPath, maxRetries)
+    -- ????????
+    try
+        tell application "System Events"
+            set UI_enabled to UI elements enabled
+        end tell
+    on error
+        display dialog "????????-&gt;??????-&gt;??-&gt;????????????????"
+        return
+    end try
+    
+    log "Checking process: " &amp; processName
+    
+    -- ??????????
+    set processExists to do shell script "pgrep -i " &amp; quoted form of processName &amp; " || echo ''"
+    log "Process check result: " &amp; processExists
+    
+    if processExists is "" then
+        log "Process not found, attempting to open " &amp; appName
+        tell application appName to open targetPath
+        return
+    end if
+    
+    log "Process found, checking windows..."
+    
     repeat maxRetries times
         try
             tell application "System Events"
                 if exists process processName then
+                    log "Found process in System Events"
                     tell process processName
                         set frontmost to true
-                        repeat with theWindow in windows
-                            if title of theWindow contains targetFolder then
-                                perform action "AXRaise" of theWindow
-                                return
-                            end if
-                        end repeat
-                        tell application appName to open targetPath
-                        return
+                        try
+                            set windowList to windows
+                            log "Windows count: " &amp; (count of windowList)
+                            set currentWindow to first window whose title contains targetFolder
+                            perform action "AXRaise" of currentWindow
+                            log "Window found and raised"
+                            return
+                        on error windowErr
+                            log "Window error: " &amp; windowErr
+                            tell application appName to open targetPath
+                            return
+                        end try
                     end tell
                 end if
             end tell
         on error errMsg
-            delay 0.5
+            log "System Events error: " &amp; errMsg
         end try
     end repeat
+    
+    log "Failed after retries, opening new window"
     tell application appName to open targetPath
 end checkAndOpenFolder</string>
 				<key>scriptargtype</key>
