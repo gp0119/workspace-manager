@@ -166,6 +166,8 @@
             tell application theApp
                 activate
                 open POSIX file filePath
+			    delay 2
+				activate
             end tell
         end using terms from
         log "Successfully opened with path: " &amp; filePath
