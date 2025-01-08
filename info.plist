@@ -10,7 +10,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>B729B4A6-EA4A-455E-B948-F2ADD892C808</string>
+				<string>ADD6CC94-AB5C-443E-8B5E-4A642DECA205</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -24,19 +24,6 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>40FEE1DE-4913-41C5-B8BC-FCBBF58C0DEC</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>3EFBA077-6C57-45A7-8028-A2394BB2E1D3</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>1A2009A3-F232-44E6-981C-702D95C66490</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -72,11 +59,11 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>3EFBA077-6C57-45A7-8028-A2394BB2E1D3</string>
+				<string>1A2009A3-F232-44E6-981C-702D95C66490</string>
 				<key>modifiers</key>
 				<integer>1048576</integer>
 				<key>modifiersubtext</key>
-				<string>reveal in Finder</string>
+				<string>Reveal File in Finder</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -92,6 +79,29 @@
 	<string>workspace-manager</string>
 	<key>objects</key>
 	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>open -nb "${bundle_id}" --args "${1}"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>ADD6CC94-AB5C-443E-8B5E-4A642DECA205</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
@@ -146,76 +156,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<true/>
-				<key>escaping</key>
-				<integer>68</integer>
-				<key>script</key>
-				<string>on run argv
-	set theQuery to item 1 of argv
-	set query to theQuery as text
-	set astid to AppleScript's text item delimiters
-	set AppleScript's text item delimiters to {","}
-	set targetPath to text item 1 of query
-	set appName to text item 2 of query
-  	set processName to text item 3 of query
-	set AppleScript's text item delimiters to astid
-  	set targetFolder to do shell script "basename " &amp; quoted form of targetPath
-  	checkAndOpenFolder(appName, processName, targetFolder, targetPath, 2)
-end run
-
-
-on checkAndOpenFolder(appName, processName, targetFolder, targetPath, maxRetries)
-    log "targetFolder: " &amp; targetFolder
-    log "targetPath: " &amp; targetPath
-    log "processName: " &amp; processName
-    set processExists to do shell script "pgrep -i " &amp; quoted form of processName &amp; " || echo ''"
-    if processExists is "" then
-        tell application appName to open targetPath
-        return
-    end if
-    
-    repeat maxRetries times
-        try
-            tell application "System Events"
-                if exists process processName then
-                    tell process processName
-                        set frontmost to true
-                        try
-                            set windowList to windows
-                            set currentWindow to first window whose title contains targetFolder
-                            perform action "AXRaise" of currentWindow
-                            return
-                        on error windowErr
-                            tell application appName to open targetPath
-                            return
-                        end try
-                    end tell
-                end if
-            end tell
-        on error errMsg
-            log "System Events error: " &amp; errMsg
-        end try
-    end repeat
-    tell application appName to open targetPath
-end checkAndOpenFolder</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>6</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>B729B4A6-EA4A-455E-B948-F2ADD892C808</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>availableviaurlhandler</key>
 				<true/>
 				<key>triggerid</key>
@@ -262,7 +202,7 @@ end checkAndOpenFolder</string>
 			<key>config</key>
 			<dict>
 				<key>argument</key>
-				<string>{var:split1}</string>
+				<string>{query}</string>
 				<key>passthroughargument</key>
 				<false/>
 				<key>variables</key>
@@ -272,27 +212,6 @@ end checkAndOpenFolder</string>
 			<string>alfred.workflow.utility.argument</string>
 			<key>uid</key>
 			<string>1A2009A3-F232-44E6-981C-702D95C66490</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>delimiter</key>
-				<string>,</string>
-				<key>discardemptyarguments</key>
-				<false/>
-				<key>outputas</key>
-				<integer>0</integer>
-				<key>trimarguments</key>
-				<false/>
-				<key>variableprefix</key>
-				<string>split</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.split</string>
-			<key>uid</key>
-			<string>3EFBA077-6C57-45A7-8028-A2394BB2E1D3</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -378,13 +297,6 @@ The workflow includes icons for:
 			<key>ypos</key>
 			<real>395</real>
 		</dict>
-		<key>3EFBA077-6C57-45A7-8028-A2394BB2E1D3</key>
-		<dict>
-			<key>xpos</key>
-			<real>480</real>
-			<key>ypos</key>
-			<real>395</real>
-		</dict>
 		<key>40FEE1DE-4913-41C5-B8BC-FCBBF58C0DEC</key>
 		<dict>
 			<key>xpos</key>
@@ -392,7 +304,7 @@ The workflow includes icons for:
 			<key>ypos</key>
 			<real>365</real>
 		</dict>
-		<key>B729B4A6-EA4A-455E-B948-F2ADD892C808</key>
+		<key>ADD6CC94-AB5C-443E-8B5E-4A642DECA205</key>
 		<dict>
 			<key>xpos</key>
 			<real>765</real>
@@ -714,7 +626,7 @@ The workflow includes icons for:
 	<key>variablesdontexport</key>
 	<array/>
 	<key>version</key>
-	<string>1.0.1</string>
+	<string>1.0.2</string>
 	<key>webaddress</key>
 	<string></string>
 </dict>

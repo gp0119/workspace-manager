@@ -1,50 +1,50 @@
 {
   "Visual Studio Code": {
     "icon": "vscode",
-    "process": "Code"
+    "bundleId": "com.microsoft.VSCode"
   },
   "Intellij IDEA Ultimate": {
     "icon": "idea",
-    "process": "Intellij IDEA"
+    "bundleId": "com.jetbrains.intellij"
   },
   "IntelliJ IDEA Community Edition": {
     "icon": "idea",
-    "process": "Intellij IDEA"
+    "bundleId": "com.jetbrains.intellij.ce"
   },
   "PyCharm Professional Edition": {
     "icon": "pycharm",
-    "process": "PyCharm"
+    "bundleId": "com.jetbrains.pycharm"
   },
   "PyCharm Community Edition": {
     "icon": "pycharm",
-    "process": "PyCharm"
+    "bundleId": "com.jetbrains.pycharm.ce"
   },
   "PhpStorm": {
     "icon": "phpstorm",
-    "process": "PhpStorm"
+    "bundleId": "com.jetbrains.phpStorm"
   },
   "WebStorm": {
     "icon": "webstorm",
-    "process": "WebStorm"
+    "bundleId": "com.jetbrains.webstorm"
   },
   "CLion": {
     "icon": "clion",
-    "process": "CLion"
+    "bundleId": "com.jetbrains.CLion"
   },
   "GoLand": {
     "icon": "goland",
-    "process": "GoLand"
+    "bundleId": "com.jetbrains.goland"
   },
   "Fleet": {
     "icon": "fleet",
-    "process": "Fleet"
+    "bundleId": "com.fleetdm.fleet"
   },
   "Rider": {
     "icon": "rider",
-    "process": "Rider"
+    "bundleId": "com.jetbrains.rider"
   },
   "RustRover": {
     "icon": "rustrover",
-    "process": "RustRover"
+    "bundleId": "com.jetbrains.rustrover"
   }
 }
