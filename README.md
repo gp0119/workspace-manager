@@ -16,7 +16,7 @@ A powerful Alfred workflow that allows you to quickly open projects in different
 
 1. `workspace`: Workspace paths (comma-separated) Example: `~/Projects,~/Work`
 
-2. `exclude`: Folders to exclude (comma-separated) Example: `node_modules,target,.git`
+2. `exclude`: Folders to exclude (comma-separated) Example: `xxx/xxx`
 
 3. IDE Configuration (up to 6):
    - `key1` - `key6`: Trigger keywords
@@ -41,6 +41,11 @@ app2: /Applications/IntelliJ IDEA.app
 3. Press Enter to open the selected project in the corresponding IDE
 4. Hold Command while selecting to reveal in Finder
 
+<image src="./usage1.png" width="580">
+<br />
+<br />
+<image src="./usage2.png" width="580">
+
 ## Supported IDEs
 
 The workflow includes icons for:
@@ -55,10 +60,3 @@ The workflow includes icons for:
 - Fleet
 - Rider
 - RustRover
-
-## Installation
-
-1. Download the workflow
-2. Double click to install in Alfred
-3. Configure workspace paths and IDE settings in workflow configuration
-4. Start using with configured keywords
