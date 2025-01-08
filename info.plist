@@ -6,32 +6,6 @@
 	<string>com.gp.openByAlfred</string>
 	<key>connections</key>
 	<dict>
-		<key>00F0ADC8-688F-439C-AB53-C2E4EA1E59D6</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>ADD6CC94-AB5C-443E-8B5E-4A642DECA205</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>1A2009A3-F232-44E6-981C-702D95C66490</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>40FEE1DE-4913-41C5-B8BC-FCBBF58C0DEC</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>C8F71183-39A6-4E9A-B220-5B527E7F2D48</key>
 		<array>
 			<dict>
@@ -49,7 +23,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>00F0ADC8-688F-439C-AB53-C2E4EA1E59D6</string>
+				<string>ADD6CC94-AB5C-443E-8B5E-4A642DECA205</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -59,7 +33,7 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>1A2009A3-F232-44E6-981C-702D95C66490</string>
+				<string>40FEE1DE-4913-41C5-B8BC-FCBBF58C0DEC</string>
 				<key>modifiers</key>
 				<integer>1048576</integer>
 				<key>modifiersubtext</key>
@@ -79,33 +53,6 @@
 	<string>workspace-manager</string>
 	<key>objects</key>
 	<array>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<true/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string>echo ${app_name}
-
-bundle_id=$(osascript -e "id of app \"$app_name\"" 2&gt;/dev/null)
-
-open -nb "$bundle_id"  --args {query}</string>
-				<key>scriptargtype</key>
-				<integer>0</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>5</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>ADD6CC94-AB5C-443E-8B5E-4A642DECA205</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
@@ -175,19 +122,29 @@ open -nb "$bundle_id"  --args {query}</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argument</key>
-				<string>{query}</string>
-				<key>passthroughargument</key>
-				<false/>
-				<key>variables</key>
-				<dict/>
+				<key>concurrently</key>
+				<true/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>echo ${app_name}
+
+bundle_id=$(osascript -e "id of app \"$app_name\"" 2&gt;/dev/null)
+
+open -nb "$bundle_id"  --args {query}</string>
+				<key>scriptargtype</key>
+				<integer>0</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>5</integer>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.utility.argument</string>
+			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>00F0ADC8-688F-439C-AB53-C2E4EA1E59D6</string>
+			<string>ADD6CC94-AB5C-443E-8B5E-4A642DECA205</string>
 			<key>version</key>
-			<integer>1</integer>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -199,23 +156,6 @@ open -nb "$bundle_id"  --args {query}</string>
 			<string>alfred.workflow.action.revealfile</string>
 			<key>uid</key>
 			<string>40FEE1DE-4913-41C5-B8BC-FCBBF58C0DEC</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argument</key>
-				<string>{query}</string>
-				<key>passthroughargument</key>
-				<false/>
-				<key>variables</key>
-				<dict/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.argument</string>
-			<key>uid</key>
-			<string>1A2009A3-F232-44E6-981C-702D95C66490</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -287,20 +227,6 @@ The workflow includes icons for:
 4. Start using with configured keywords</string>
 	<key>uidata</key>
 	<dict>
-		<key>00F0ADC8-688F-439C-AB53-C2E4EA1E59D6</key>
-		<dict>
-			<key>xpos</key>
-			<real>605</real>
-			<key>ypos</key>
-			<real>265</real>
-		</dict>
-		<key>1A2009A3-F232-44E6-981C-702D95C66490</key>
-		<dict>
-			<key>xpos</key>
-			<real>605</real>
-			<key>ypos</key>
-			<real>395</real>
-		</dict>
 		<key>40FEE1DE-4913-41C5-B8BC-FCBBF58C0DEC</key>
 		<dict>
 			<key>xpos</key>
