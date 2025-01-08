@@ -57,9 +57,9 @@
 			<key>config</key>
 			<dict>
 				<key>alfredfiltersresults</key>
-				<false/>
+				<true/>
 				<key>alfredfiltersresultsmatchmode</key>
-				<integer>0</integer>
+				<integer>2</integer>
 				<key>argumenttreatemptyqueryasnil</key>
 				<true/>
 				<key>argumenttrimmode</key>
@@ -547,6 +547,8 @@ The workflow includes icons for:
 			<string>app6</string>
 		</dict>
 	</array>
+	<key>variablesdontexport</key>
+	<array/>
 	<key>version</key>
 	<string>1.0.4</string>
 	<key>webaddress</key>

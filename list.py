@@ -21,9 +21,6 @@ def load_ide_config():
         sys.stderr.write(f"Error loading config: {str(e)}\n")
         return {}
 
-def get_query() -> str:
-    return sys.argv[1]
-
 def get_folder_path(path_str: str) -> List[str]:
     if not path_str:
         return []
@@ -36,7 +33,7 @@ def get_folder_path(path_str: str) -> List[str]:
     sys.stderr.write('paths:   ' + str(paths) + "\n")
     return paths
 
-def update_projects() -> List[Mapping[str,str]]:
+def get_projects() -> List[Mapping[str,str]]:
     projects = []
     for path in get_folder_path(ws):
         for name in os.listdir(path):
@@ -99,29 +96,16 @@ def create_item(project: dict, key_app: dict, keyword: str) -> AlfredItem:
         }
     }
 
-def filter_projects(projects: List[dict], query: Optional[str]) -> List[dict]:
-    if not query:
-        return projects
-    return [
-        project for project in projects
-        if query.lower() in project['name'].lower()
-    ]
-
-
-
 def main() -> List[Mapping[str, str]]:
     try:
-        query = get_query()
-        sys.stderr.write("query:   " + query + "\n")
         key_app = handle_app_name()
         if not key_app or keyword not in key_app:
             raise ValueError("Invalid application configuration")
-        projects = update_projects()
-        filtered_projects = filter_projects(projects, query)
+        projects = get_projects()
         items = [
                 create_item(project, key_app, keyword)
-                for project in filtered_projects
-            ] if filtered_projects else [DEFAULT_ITEM]
+                for project in projects
+            ] if projects else [DEFAULT_ITEM]
             
         print(json.dumps({'items': items}))
         return items
