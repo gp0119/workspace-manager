@@ -1,0 +1,50 @@
+{
+  "Visual Studio Code": {
+    "icon": "vscode",
+    "process": "Code"
+  },
+  "Intellij IDEA Ultimate": {
+    "icon": "idea",
+    "process": "Intellij IDEA"
+  },
+  "IntelliJ IDEA Community Edition": {
+    "icon": "idea",
+    "process": "Intellij IDEA"
+  },
+  "PyCharm Professional Edition": {
+    "icon": "pycharm",
+    "process": "PyCharm"
+  },
+  "PyCharm Community Edition": {
+    "icon": "pycharm",
+    "process": "PyCharm"
+  },
+  "PhpStorm": {
+    "icon": "phpstorm",
+    "process": "PhpStorm"
+  },
+  "WebStorm": {
+    "icon": "webstorm",
+    "process": "WebStorm"
+  },
+  "CLion": {
+    "icon": "clion",
+    "process": "CLion"
+  },
+  "GoLand": {
+    "icon": "goland",
+    "process": "GoLand"
+  },
+  "Fleet": {
+    "icon": "fleet",
+    "process": "Fleet"
+  },
+  "Rider": {
+    "icon": "rider",
+    "process": "Rider"
+  },
+  "RustRover": {
+    "icon": "rustrover",
+    "process": "RustRover"
+  }
+}

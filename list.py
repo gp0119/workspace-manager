@@ -12,20 +12,14 @@ exclude = os.getenv('exclude')
 exclude = exclude.split(',') if exclude else []
 sys.stderr.write('workspace:   ' + ws + "\n")
 
-ICON_MAP = {
-    'vscode': {'Visual Studio Code'},
-    'idea': {'IntelliJ IDEA Ultimate', 'IntelliJ IDEA Community Edition'},
-    'pycharm': {'PyCharm Professional Edition', 'PyCharm Community Edition', 'PyCharm Edu', 'PyCharm'},
-    'phpstorm': {'PhpStorm'},
-    'webstorm': {'WebStorm'},
-    'clion': {'CLion'},
-    'goland': {'GoLand'},
-    'fleet': {'Fleet'},
-    'rider': {'Rider'},
-    'rust': {'RustRover'},
-    'go': {'GoLand'},
-}
-
+def load_ide_config():
+    config_path = os.path.join(os.path.dirname(__file__), 'config.json')
+    try:
+        with open(config_path, 'r') as f:
+            return json.load(f)
+    except Exception as e:
+        sys.stderr.write(f"Error loading config: {str(e)}\n")
+        return {}
 
 def get_query() -> str:
     return sys.argv[1]
@@ -56,10 +50,14 @@ def update_projects() -> List[Mapping[str,str]]:
     return projects
 
 def get_icon(app_name: str) -> str:
-    for icon_key, app_names in ICON_MAP.items():
-        if app_name in app_names:
-            return f'./{icon_key}.png'
-    return './icon.png'
+    config = load_ide_config()
+    ide_config = config.get(app_name, {})
+    return f"./{ide_config.get('icon', 'default')}.png"
+
+def get_process_name(app_name: str) -> str:
+    config = load_ide_config()
+    ide_config = config.get('ides', {}).get(app_name, {})
+    return ide_config.get('process', app_name)
 
 def handle_app_name() -> Mapping[str, Mapping[str, str]]:
     key_app = {}
@@ -68,11 +66,15 @@ def handle_app_name() -> Mapping[str, Mapping[str, str]]:
         app_name = os.getenv(f'app{i}')
         if app_name and key:
             app_name = app_name.split('/')[-1]
+            if app_name.endswith('.app'):
+                app_name = app_name[:-4]
             key_app[key] = {
                 'app_name': app_name,
                 'app_path': os.path.expanduser(os.path.expandvars(app_name)),
-                'icon_path': get_icon(app_name)
+                'icon_path': get_icon(app_name),
+                'process_name': get_process_name(app_name)
             }
+    sys.stderr.write('key_app:   ' + str(key_app) + "\n")
     return key_app
 
 class AlfredItem(TypedDict):
@@ -93,7 +95,7 @@ def create_item(project: dict, key_app: dict, keyword: str) -> AlfredItem:
         'uid': project['path'],
         'title': project['name'],
         'subtitle': project['path'],
-        'arg': f"{project['path']},{key_app[keyword]['app_path']}",
+        'arg': f"{project['path']},{key_app[keyword]['app_path']},{key_app[keyword]['process_name']}",
         'icon': {
             'path': key_app[keyword]['icon_path']
         }
@@ -123,7 +125,6 @@ def main() -> List[Mapping[str, str]]:
                 for project in filtered_projects
             ] if filtered_projects else [DEFAULT_ITEM]
             
-        sys.stderr.write(f"items: {items}\n")
         print(json.dumps({'items': items}))
         return items
     except Exception as e:
