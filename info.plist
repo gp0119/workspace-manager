@@ -83,17 +83,21 @@
 			<key>config</key>
 			<dict>
 				<key>concurrently</key>
-				<false/>
+				<true/>
 				<key>escaping</key>
 				<integer>102</integer>
 				<key>script</key>
-				<string>open -nb "${bundle_id}" --args "${1}"</string>
+				<string>echo ${app_name}
+
+bundle_id=$(osascript -e "id of app \"$app_name\"" 2&gt;/dev/null)
+
+open -nb "$bundle_id"  --args {query}</string>
 				<key>scriptargtype</key>
-				<integer>1</integer>
+				<integer>0</integer>
 				<key>scriptfile</key>
 				<string></string>
 				<key>type</key>
-				<integer>0</integer>
+				<integer>5</integer>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.script</string>
@@ -626,7 +630,7 @@ The workflow includes icons for:
 	<key>variablesdontexport</key>
 	<array/>
 	<key>version</key>
-	<string>1.0.2</string>
+	<string>1.0.3</string>
 	<key>webaddress</key>
 	<string></string>
 </dict>

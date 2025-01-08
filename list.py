@@ -54,11 +54,6 @@ def get_icon(app_name: str) -> str:
     ide_config = config.get(app_name, {})
     return f"./{ide_config.get('icon', 'default')}.png"
 
-def get_bundle_id(app_name: str) -> str:
-    config = load_ide_config()
-    ide_config = config.get(app_name, {})
-    return ide_config.get('bundleId', 'com.apple.finder')
-
 def handle_app_name() -> Mapping[str, Mapping[str, str]]:
     key_app = {}
     for i in range(1, MAX_APP_COUNT + 1):
@@ -72,7 +67,6 @@ def handle_app_name() -> Mapping[str, Mapping[str, str]]:
                 'app_name': app_name,
                 'app_path': os.path.expanduser(os.path.expandvars(app_name)),
                 'icon_path': get_icon(app_name),
-                'bundle_id': get_bundle_id(app_name)
             }
     sys.stderr.write('key_app:   ' + str(key_app) + "\n")
     return key_app
@@ -81,6 +75,7 @@ class AlfredItem(TypedDict):
     uid: Optional[str]
     title: str
     subtitle: str
+    variables: dict[str, str]
     arg: Optional[str]
     icon: dict[str, str]
 
@@ -97,7 +92,7 @@ def create_item(project: dict, key_app: dict, keyword: str) -> AlfredItem:
         'subtitle': project['path'],
         'arg': project['path'],
         'variables': {
-            'bundle_id': key_app[keyword]['bundle_id']
+            'app_name': key_app[keyword]['app_name']
         },
         'icon': {
             'path': key_app[keyword]['icon_path']
