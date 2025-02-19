@@ -49,7 +49,7 @@ def get_projects() -> List[Mapping[str,str]]:
 def get_icon(app_name: str) -> str:
     config = load_ide_config()
     ide_config = config.get(app_name, {})
-    return f"./{ide_config.get('icon', 'default')}.png"
+    return f"./{ide_config.get('icon', 'icon')}.png"
 
 def handle_app_name() -> Mapping[str, Mapping[str, str]]:
     key_app = {}
@@ -79,7 +79,7 @@ class AlfredItem(TypedDict):
 DEFAULT_ITEM = {
     'title': 'No result found',
     'subtitle': 'Try another keyword',
-    'icon': {'path': './default.png'}
+    'icon': {'path': './icon.png'}
 }
 
 def create_item(project: dict, key_app: dict, keyword: str) -> AlfredItem:
@@ -107,7 +107,7 @@ def main() -> List[Mapping[str, str]]:
                 for project in projects
             ] if projects else [DEFAULT_ITEM]
             
-        print(json.dumps({'items': items}))
+        json.dump({'items': items}, sys.stdout)
         return items
     except Exception as e:
         sys.stderr.write(f"Error: {str(e)}\n")

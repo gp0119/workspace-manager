@@ -34,5 +34,8 @@
   },
   "RustRover": {
     "icon": "rustrover"
+  },
+  "Cursor": {
+    "icon": "cursor"
   }
 }
