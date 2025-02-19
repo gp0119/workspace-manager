@@ -60,3 +60,4 @@ The workflow includes icons for:
 - Fleet
 - Rider
 - RustRover
+- Cursor

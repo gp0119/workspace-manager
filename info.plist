@@ -547,9 +547,11 @@ The workflow includes icons for:
 			<string>app6</string>
 		</dict>
 	</array>
+	<key>variablesdontexport</key>
+	<array/>
 	<key>version</key>
-	<string>1.0.6</string>
+	<string>1.0.7</string>
 	<key>webaddress</key>
-	<string></string>
+	<string>https://github.com/gp0119/workspace-manager</string>
 </dict>
 </plist>
