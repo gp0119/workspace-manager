@@ -3,7 +3,7 @@ import sys
 from typing import List, Mapping, Optional, TypedDict
 import json
 from utils import get_icon
-from refresh_projects import get_projects
+from refresh_projects import get_projects, refresh_projects
 
 MAX_APP_COUNT = 6
 keyword = os.getenv("alfred_workflow_keyword")
@@ -62,22 +62,16 @@ def create_item(project: dict, key_app: dict, keyword: str) -> AlfredItem:
 
 
 def main() -> List[Mapping[str, str]]:
-    try:
-        key_app = handle_app_name()
-        if not key_app or keyword not in key_app:
-            raise ValueError("Invalid application configuration")
-        projects = get_projects()
-        items = (
-            [create_item(project, key_app, keyword) for project in projects]
-            if projects
-            else [DEFAULT_ITEM]
-        )
+    key_app = handle_app_name()
+    projects = get_projects()
+    items = (
+        [create_item(project, key_app, keyword) for project in projects]
+        if projects
+        else [DEFAULT_ITEM]
+    )
 
-        json.dump({"items": items}, sys.stdout)
-        return items
-    except Exception as e:
-        sys.stderr.write(f"Error: {str(e)}\n")
-        return [DEFAULT_ITEM]
+    json.dump({"items": items}, sys.stdout)
+    refresh_projects()
 
 
 if __name__ == "__main__":

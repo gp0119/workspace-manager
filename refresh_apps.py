@@ -1,41 +1,53 @@
 import os
-import time
+import sys
 from utils import (
     load_cache,
     save_cache,
-    get_folder_path,
     get_icon,
     is_app_installed,
-    CACHE_DURATION,
     MAX_APP_COUNT,
 )
 
 
-def get_exist_app_name() -> list:
-    # 尝试从缓存加载
-    cached_items, timestamp = load_cache("app_items")
-    current_time = time.time()
-
-    # 如果缓存有效，直接返回缓存数据
-    if cached_items and (current_time - timestamp) < (CACHE_DURATION * 60):  # 转换为秒
-        return cached_items
-
-    app_items = []
-    folder_path = get_folder_path()
-
-    # 获取路径最后的文件夹名称
+def get_exist_app_name(folder_path: str) -> list:
+    cached_app_names, _ = load_cache("app_names")
     folder_name = folder_path.rstrip("/").split("/")[-1]
+    if cached_app_names:
+        return render_app_items(cached_app_names, folder_path, folder_name)
+    else:
+        app_names = refresh_apps()
+        return render_app_items(app_names, folder_path, folder_name)
 
-    if not folder_path:
-        return [
+
+def render_app_items(app_names: list, folder_path: str, folder_name: str) -> list:
+    app_items = []
+    for app_name in app_names:
+        app_items.append(
             {
-                "uid": "folder",
-                "title": "Please select a folder",
-                "subtitle": "Please select a folder",
+                "uid": app_name,
+                "title": app_name,
+                "subtitle": f"Open {folder_name} with {app_name}",
+                "variables": {"app_name": app_name, "folder_path": folder_path},
+                "icon": {"path": get_icon(app_name)},
+                "arg": folder_path,
+            }
+        )
+    return (
+        app_items
+        if app_items
+        else [
+            {
+                "uid": "no_apps",
+                "title": "No installed apps found",
+                "subtitle": "Please install the configured apps",
                 "icon": {"path": "./icon.png"},
             }
         ]
+    )
 
+
+def refresh_apps() -> list:
+    app_names = []
     for i in range(1, MAX_APP_COUNT + 1):
         key = os.getenv(f"key{i}")
         app_name = os.getenv(f"app{i}")
@@ -46,29 +58,7 @@ def get_exist_app_name() -> list:
 
             if not is_app_installed(app_name):
                 continue
+            app_names.append(app_name)
 
-            app_items.append(
-                {
-                    "uid": app_name,
-                    "title": app_name,
-                    "subtitle": f"Open {folder_name} with {app_name}",
-                    "icon": {"path": get_icon(app_name)},
-                    "variables": {"app_name": app_name, "folder_path": folder_path},
-                    "arg": folder_path,
-                }
-            )
-
-    if not app_items:
-        app_items = [
-            {
-                "uid": "no_apps",
-                "title": "No installed apps found",
-                "subtitle": "Please install the configured apps",
-                "arg": "refresh_apps",
-                "icon": {"path": "./icon.png"},
-            }
-        ]
-
-    # 保存到缓存
-    save_cache(app_items, "app_items")
-    return app_items
+    save_cache(app_names, "app_names")
+    return app_names

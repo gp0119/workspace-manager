@@ -10,19 +10,6 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>54EAF373-8B81-41CD-B0DA-BBC1CF106559</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>54EAF373-8B81-41CD-B0DA-BBC1CF106559</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
 				<string>ADD6CC94-AB5C-443E-8B5E-4A642DECA205</string>
 				<key>modifiers</key>
 				<integer>0</integer>
@@ -36,7 +23,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>54EAF373-8B81-41CD-B0DA-BBC1CF106559</string>
+				<string>ADD6CC94-AB5C-443E-8B5E-4A642DECA205</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -92,7 +79,7 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>54EAF373-8B81-41CD-B0DA-BBC1CF106559</string>
+				<string>ADD6CC94-AB5C-443E-8B5E-4A642DECA205</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -116,7 +103,7 @@
 			<key>config</key>
 			<dict>
 				<key>alfredfiltersresults</key>
-				<false/>
+				<true/>
 				<key>alfredfiltersresultsmatchmode</key>
 				<integer>2</integer>
 				<key>argumenttreatemptyqueryasnil</key>
@@ -179,27 +166,17 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string>query=$1
-
-echo -n $query</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>11</integer>
+				<key>availableviaurlhandler</key>
+				<true/>
+				<key>triggerid</key>
+				<string>*ifdir</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.script</string>
+			<string>alfred.workflow.trigger.external</string>
 			<key>uid</key>
-			<string>ED80BD4A-18DB-4712-975D-043379B593C7</string>
+			<string>C8F71183-39A6-4E9A-B220-5B527E7F2D48</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -253,63 +230,29 @@ echo -n $query</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>conditions</key>
-				<array>
-					<dict>
-						<key>inputstring</key>
-						<string></string>
-						<key>matchcasesensitive</key>
-						<false/>
-						<key>matchmode</key>
-						<integer>0</integer>
-						<key>matchstring</key>
-						<string>refresh_apps</string>
-						<key>outputlabel</key>
-						<string>refresh_apps</string>
-						<key>uid</key>
-						<string>3A350738-3892-4B89-B2B0-1BC15113A511</string>
-					</dict>
-					<dict>
-						<key>inputstring</key>
-						<string></string>
-						<key>matchcasesensitive</key>
-						<false/>
-						<key>matchmode</key>
-						<integer>0</integer>
-						<key>matchstring</key>
-						<string>refresh_projects</string>
-						<key>outputlabel</key>
-						<string>refresh_projects</string>
-						<key>uid</key>
-						<string>284ED5AB-0A33-48E8-A567-496A7EE87E6E</string>
-					</dict>
-				</array>
-				<key>elselabel</key>
-				<string>open</string>
-				<key>hideelse</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.conditional</string>
-			<key>uid</key>
-			<string>54EAF373-8B81-41CD-B0DA-BBC1CF106559</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>availableviaurlhandler</key>
+				<key>concurrently</key>
 				<true/>
-				<key>triggerid</key>
-				<string>*ifdir</string>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>echo ${app_name} ${folder_path}
+
+bundle_id=$(osascript -e "id of app \"$app_name\"" 2&gt;/dev/null)
+
+open -nb "$bundle_id"  --args $folder_path</string>
+				<key>scriptargtype</key>
+				<integer>0</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>5</integer>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.trigger.external</string>
+			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>C8F71183-39A6-4E9A-B220-5B527E7F2D48</string>
+			<string>ADD6CC94-AB5C-443E-8B5E-4A642DECA205</string>
 			<key>version</key>
-			<integer>1</integer>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -359,33 +302,6 @@ echo -n $query</string>
 			<string>74F097BE-59FF-4270-A630-B11F15101E1A</string>
 			<key>version</key>
 			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<true/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string>echo ${app_name} ${folder_path}
-
-bundle_id=$(osascript -e "id of app \"$app_name\"" 2&gt;/dev/null)
-
-open -nb "$bundle_id"  --args $folder_path</string>
-				<key>scriptargtype</key>
-				<integer>0</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>5</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>ADD6CC94-AB5C-443E-8B5E-4A642DECA205</string>
-			<key>version</key>
-			<integer>2</integer>
 		</dict>
 	</array>
 	<key>readme</key>
@@ -452,58 +368,44 @@ The workflow includes icons for:
 		<key>2D37A8A5-AECA-4276-8AC7-53A32624B417</key>
 		<dict>
 			<key>xpos</key>
-			<real>245</real>
+			<real>250</real>
 			<key>ypos</key>
-			<real>415</real>
+			<real>410</real>
 		</dict>
 		<key>40FEE1DE-4913-41C5-B8BC-FCBBF58C0DEC</key>
 		<dict>
 			<key>xpos</key>
-			<real>785</real>
+			<real>780</real>
 			<key>ypos</key>
 			<real>235</real>
-		</dict>
-		<key>54EAF373-8B81-41CD-B0DA-BBC1CF106559</key>
-		<dict>
-			<key>xpos</key>
-			<real>525</real>
-			<key>ypos</key>
-			<real>420</real>
 		</dict>
 		<key>74F097BE-59FF-4270-A630-B11F15101E1A</key>
 		<dict>
 			<key>xpos</key>
 			<real>250</real>
 			<key>ypos</key>
-			<real>595</real>
+			<real>600</real>
 		</dict>
 		<key>ADD6CC94-AB5C-443E-8B5E-4A642DECA205</key>
 		<dict>
 			<key>xpos</key>
-			<real>790</real>
+			<real>785</real>
 			<key>ypos</key>
-			<real>635</real>
+			<real>415</real>
 		</dict>
 		<key>C8F71183-39A6-4E9A-B220-5B527E7F2D48</key>
 		<dict>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>420</real>
+			<real>405</real>
 		</dict>
 		<key>CBD343D1-1736-4418-B8D9-80A60D4E10DE</key>
 		<dict>
 			<key>xpos</key>
-			<real>245</real>
+			<real>250</real>
 			<key>ypos</key>
 			<real>235</real>
-		</dict>
-		<key>ED80BD4A-18DB-4712-975D-043379B593C7</key>
-		<dict>
-			<key>xpos</key>
-			<real>790</real>
-			<key>ypos</key>
-			<real>370</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
@@ -722,7 +624,7 @@ The workflow includes icons for:
 			<key>config</key>
 			<dict>
 				<key>default</key>
-				<string>rr</string>
+				<string>cs</string>
 				<key>placeholder</key>
 				<string></string>
 				<key>required</key>
@@ -743,7 +645,7 @@ The workflow includes icons for:
 			<key>config</key>
 			<dict>
 				<key>default</key>
-				<string>RustRover</string>
+				<string>Cursor</string>
 				<key>filtermode</key>
 				<integer>2</integer>
 				<key>placeholder</key>
