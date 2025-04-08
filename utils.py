@@ -3,7 +3,8 @@ import sys
 import subprocess
 import json
 import time
-from typing import List
+from typing import List, Dict, Any
+from fuzzywuzzy import fuzz
 
 MAX_APP_COUNT = 6
 CACHE_DURATION = 5  # 缓存时间（分钟）
@@ -147,3 +148,26 @@ def get_folder_path(path_str: str) -> List[str]:
         paths.append(p)
     sys.stderr.write("paths:   " + str(paths) + "\n")
     return paths
+
+
+def fuzzy_search(
+    items: List[Dict[str, Any]], query: str, key: str = "name", threshold: int = 60
+) -> List[Dict[str, Any]]:
+    if not query:
+        return items
+
+    results = []
+    for item in items:
+        if key not in item:
+            continue
+
+        # 计算相似度
+        ratio = fuzz.ratio(query.lower(), str(item[key]).lower())
+        if ratio >= threshold:
+            results.append(item)
+
+    # 按相似度排序
+    results.sort(
+        key=lambda x: fuzz.ratio(query.lower(), str(x[key]).lower()), reverse=True
+    )
+    return results
