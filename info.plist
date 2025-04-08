@@ -6,6 +6,45 @@
 	<string>com.gp.openByAlfred</string>
 	<key>connections</key>
 	<dict>
+		<key>2D37A8A5-AECA-4276-8AC7-53A32624B417</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>54EAF373-8B81-41CD-B0DA-BBC1CF106559</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>54EAF373-8B81-41CD-B0DA-BBC1CF106559</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>ADD6CC94-AB5C-443E-8B5E-4A642DECA205</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>74F097BE-59FF-4270-A630-B11F15101E1A</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>54EAF373-8B81-41CD-B0DA-BBC1CF106559</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>C8F71183-39A6-4E9A-B220-5B527E7F2D48</key>
 		<array>
 			<dict>
@@ -18,12 +57,9 @@
 				<key>vitoclose</key>
 				<false/>
 			</dict>
-		</array>
-		<key>CBD343D1-1736-4418-B8D9-80A60D4E10DE</key>
-		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>ADD6CC94-AB5C-443E-8B5E-4A642DECA205</string>
+				<string>2D37A8A5-AECA-4276-8AC7-53A32624B417</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -33,11 +69,34 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
+				<string>74F097BE-59FF-4270-A630-B11F15101E1A</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>CBD343D1-1736-4418-B8D9-80A60D4E10DE</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
 				<string>40FEE1DE-4913-41C5-B8BC-FCBBF58C0DEC</string>
 				<key>modifiers</key>
 				<integer>1048576</integer>
 				<key>modifiersubtext</key>
 				<string>Reveal File in Finder</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>54EAF373-8B81-41CD-B0DA-BBC1CF106559</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -57,7 +116,7 @@
 			<key>config</key>
 			<dict>
 				<key>alfredfiltersresults</key>
-				<true/>
+				<false/>
 				<key>alfredfiltersresultsmatchmode</key>
 				<integer>2</integer>
 				<key>argumenttreatemptyqueryasnil</key>
@@ -107,6 +166,139 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>path</key>
+				<string>{query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.revealfile</string>
+			<key>uid</key>
+			<string>40FEE1DE-4913-41C5-B8BC-FCBBF58C0DEC</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>query=$1
+
+echo -n $query</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>11</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>ED80BD4A-18DB-4712-975D-043379B593C7</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>keyword</key>
+				<string>{var:open}</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string></string>
+				<key>script</key>
+				<string>./py3.sh open_select.py</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string></string>
+				<key>type</key>
+				<integer>11</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>2D37A8A5-AECA-4276-8AC7-53A32624B417</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>conditions</key>
+				<array>
+					<dict>
+						<key>inputstring</key>
+						<string></string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>0</integer>
+						<key>matchstring</key>
+						<string>refresh_apps</string>
+						<key>outputlabel</key>
+						<string>refresh_apps</string>
+						<key>uid</key>
+						<string>3A350738-3892-4B89-B2B0-1BC15113A511</string>
+					</dict>
+					<dict>
+						<key>inputstring</key>
+						<string></string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>0</integer>
+						<key>matchstring</key>
+						<string>refresh_projects</string>
+						<key>outputlabel</key>
+						<string>refresh_projects</string>
+						<key>uid</key>
+						<string>284ED5AB-0A33-48E8-A567-496A7EE87E6E</string>
+					</dict>
+				</array>
+				<key>elselabel</key>
+				<string>open</string>
+				<key>hideelse</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.conditional</string>
+			<key>uid</key>
+			<string>54EAF373-8B81-41CD-B0DA-BBC1CF106559</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>availableviaurlhandler</key>
 				<true/>
 				<key>triggerid</key>
@@ -122,16 +314,65 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>keyword</key>
+				<string>{var:open_current}</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string></string>
+				<key>script</key>
+				<string>./py3.sh open_active.py</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string></string>
+				<key>type</key>
+				<integer>11</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>74F097BE-59FF-4270-A630-B11F15101E1A</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>concurrently</key>
 				<true/>
 				<key>escaping</key>
 				<integer>102</integer>
 				<key>script</key>
-				<string>echo ${app_name}
+				<string>echo ${app_name} ${folder_path}
 
 bundle_id=$(osascript -e "id of app \"$app_name\"" 2&gt;/dev/null)
 
-open -nb "$bundle_id"  --args {query}</string>
+open -nb "$bundle_id"  --args $folder_path</string>
 				<key>scriptargtype</key>
 				<integer>0</integer>
 				<key>scriptfile</key>
@@ -145,19 +386,6 @@ open -nb "$bundle_id"  --args {query}</string>
 			<string>ADD6CC94-AB5C-443E-8B5E-4A642DECA205</string>
 			<key>version</key>
 			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>path</key>
-				<string>{query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.revealfile</string>
-			<key>uid</key>
-			<string>40FEE1DE-4913-41C5-B8BC-FCBBF58C0DEC</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 	</array>
 	<key>readme</key>
@@ -221,26 +449,47 @@ The workflow includes icons for:
 - RustRover</string>
 	<key>uidata</key>
 	<dict>
+		<key>2D37A8A5-AECA-4276-8AC7-53A32624B417</key>
+		<dict>
+			<key>xpos</key>
+			<real>245</real>
+			<key>ypos</key>
+			<real>415</real>
+		</dict>
 		<key>40FEE1DE-4913-41C5-B8BC-FCBBF58C0DEC</key>
 		<dict>
 			<key>xpos</key>
-			<real>765</real>
+			<real>785</real>
 			<key>ypos</key>
-			<real>365</real>
+			<real>235</real>
+		</dict>
+		<key>54EAF373-8B81-41CD-B0DA-BBC1CF106559</key>
+		<dict>
+			<key>xpos</key>
+			<real>525</real>
+			<key>ypos</key>
+			<real>420</real>
+		</dict>
+		<key>74F097BE-59FF-4270-A630-B11F15101E1A</key>
+		<dict>
+			<key>xpos</key>
+			<real>250</real>
+			<key>ypos</key>
+			<real>595</real>
 		</dict>
 		<key>ADD6CC94-AB5C-443E-8B5E-4A642DECA205</key>
 		<dict>
 			<key>xpos</key>
-			<real>765</real>
+			<real>790</real>
 			<key>ypos</key>
-			<real>235</real>
+			<real>635</real>
 		</dict>
 		<key>C8F71183-39A6-4E9A-B220-5B527E7F2D48</key>
 		<dict>
 			<key>xpos</key>
-			<real>35</real>
+			<real>30</real>
 			<key>ypos</key>
-			<real>235</real>
+			<real>420</real>
 		</dict>
 		<key>CBD343D1-1736-4418-B8D9-80A60D4E10DE</key>
 		<dict>
@@ -248,6 +497,13 @@ The workflow includes icons for:
 			<real>245</real>
 			<key>ypos</key>
 			<real>235</real>
+		</dict>
+		<key>ED80BD4A-18DB-4712-975D-043379B593C7</key>
+		<dict>
+			<key>xpos</key>
+			<real>790</real>
+			<key>ypos</key>
+			<real>370</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
@@ -546,9 +802,49 @@ The workflow includes icons for:
 			<key>variable</key>
 			<string>app6</string>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>op</string>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<true/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string></string>
+			<key>label</key>
+			<string>open floder with</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>open</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>opc</string>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<true/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string></string>
+			<key>label</key>
+			<string>Open the current active folder</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>open_current</string>
+		</dict>
 	</array>
-	<key>variablesdontexport</key>
-	<array/>
 	<key>version</key>
 	<string>1.0.7</string>
 	<key>webaddress</key>
