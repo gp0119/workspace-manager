@@ -820,8 +820,10 @@ The workflow includes icons for:
 			<string>open_current</string>
 		</dict>
 	</array>
+	<key>variablesdontexport</key>
+	<array/>
 	<key>version</key>
-	<string>1.0.7</string>
+	<string>1.0.8</string>
 	<key>webaddress</key>
 	<string>https://github.com/gp0119/workspace-manager</string>
 </dict>
