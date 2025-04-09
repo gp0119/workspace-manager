@@ -1,53 +1,49 @@
 import os
-import sys
 from utils import (
     load_cache,
     save_cache,
     get_icon,
     is_app_installed,
     MAX_APP_COUNT,
+    NOT_INSTALLED_ITEM,
 )
 
 
-def get_exist_app_name(folder_path: str) -> list:
-    cached_app_names, _ = load_cache("app_names")
-    folder_name = folder_path.rstrip("/").split("/")[-1]
-    if cached_app_names:
-        return render_app_items(cached_app_names, folder_path, folder_name)
+def get_key_app() -> dict:
+    cached_key_app, _ = load_cache("key_app")
+    if cached_key_app:
+        return cached_key_app
     else:
-        app_names = refresh_apps()
-        return render_app_items(app_names, folder_path, folder_name)
+        return refresh_apps()
 
 
-def render_app_items(app_names: list, folder_path: str, folder_name: str) -> list:
+def get_exist_app_name(folder_path: str) -> list:
+    key_app = get_key_app()
+    folder_name = folder_path.rstrip("/").split("/")[-1]
+    return render_app_items(key_app, folder_path, folder_name)
+
+
+def render_app_items(key_app: dict, folder_path: str, folder_name: str) -> list:
     app_items = []
-    for app_name in app_names:
+    for key, app_info in key_app.items():
         app_items.append(
             {
-                "uid": app_name,
-                "title": app_name,
-                "subtitle": f"Open {folder_name} with {app_name}",
-                "variables": {"app_name": app_name, "folder_path": folder_path},
-                "icon": {"path": get_icon(app_name)},
+                "uid": key,
+                "title": f"{folder_name} 👉 {app_info['app_name']}",
+                "subtitle": f"Open {folder_name} with {app_info['app_name']}",
+                "variables": {
+                    "app_name": app_info["app_name"],
+                    "folder_path": folder_path,
+                },
+                "icon": {"path": app_info["icon_path"]},
                 "arg": folder_path,
             }
         )
-    return (
-        app_items
-        if app_items
-        else [
-            {
-                "uid": "no_apps",
-                "title": "No installed apps found",
-                "subtitle": "Please install the configured apps",
-                "icon": {"path": "./icon.png"},
-            }
-        ]
-    )
+    return app_items if app_items else [NOT_INSTALLED_ITEM]
 
 
 def refresh_apps() -> list:
-    app_names = []
+    key_app = {}
     for i in range(1, MAX_APP_COUNT + 1):
         key = os.getenv(f"key{i}")
         app_name = os.getenv(f"app{i}")
@@ -55,10 +51,13 @@ def refresh_apps() -> list:
             app_name = app_name.split("/")[-1]
             if app_name.endswith(".app"):
                 app_name = app_name[:-4]
-
             if not is_app_installed(app_name):
                 continue
-            app_names.append(app_name)
+            key_app[key] = {
+                "app_name": app_name,
+                "app_path": os.path.expanduser(os.path.expandvars(app_name)),
+                "icon_path": get_icon(app_name),
+            }
 
-    save_cache(app_names, "app_names")
-    return app_names
+    save_cache(key_app, "key_app")
+    return key_app

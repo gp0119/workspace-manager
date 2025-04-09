@@ -19,6 +19,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>4D0F98B5-A770-4655-B924-AFA64125CBB4</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>A8C4ABAA-B471-4121-8BC1-C6625AD40D94</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>74F097BE-59FF-4270-A630-B11F15101E1A</key>
 		<array>
 			<dict>
@@ -303,6 +316,52 @@ open -nb "$bundle_id"  --args $folder_path</string>
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>keyword</key>
+				<string>refresh</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>refresh cache</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>4D0F98B5-A770-4655-B924-AFA64125CBB4</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>query=$1
+
+./py3.sh refresh.py</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>11</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>A8C4ABAA-B471-4121-8BC1-C6625AD40D94</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string># Workspace Manager Alfred Workflow
@@ -379,12 +438,26 @@ The workflow includes icons for:
 			<key>ypos</key>
 			<real>235</real>
 		</dict>
+		<key>4D0F98B5-A770-4655-B924-AFA64125CBB4</key>
+		<dict>
+			<key>xpos</key>
+			<real>35</real>
+			<key>ypos</key>
+			<real>760</real>
+		</dict>
 		<key>74F097BE-59FF-4270-A630-B11F15101E1A</key>
 		<dict>
 			<key>xpos</key>
 			<real>250</real>
 			<key>ypos</key>
 			<real>600</real>
+		</dict>
+		<key>A8C4ABAA-B471-4121-8BC1-C6625AD40D94</key>
+		<dict>
+			<key>xpos</key>
+			<real>250</real>
+			<key>ypos</key>
+			<real>760</real>
 		</dict>
 		<key>ADD6CC94-AB5C-443E-8B5E-4A642DECA205</key>
 		<dict>

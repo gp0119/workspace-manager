@@ -9,6 +9,35 @@ MAX_APP_COUNT = 6
 CACHE_DURATION = 5  # 缓存时间（分钟）
 
 
+NOT_FOUND_PROJECT_ITEM = {
+    "uid": "no_projects",
+    "title": "No Result Found",
+    "subtitle": "Please Check Config Path",
+    "icon": {"path": "./icon.png"},
+}
+
+NOT_INSTALLED_ITEM = {
+    "uid": "no_apps",
+    "title": "No Installed Apps Found",
+    "subtitle": "Please Install the Configured Apps",
+    "icon": {"path": "./icon.png"},
+}
+
+NOT_SELECTED_FOLDER_ITEM = {
+    "uid": "no_selected_folder",
+    "title": "Please Select a Folder",
+    "subtitle": "Please Select a Folder",
+    "icon": {"path": "./icon.png"},
+}
+
+NOT_ENTER_FOLDER_ITEM = {
+    "uid": "no_enter_folder",
+    "title": "Please Enter a Folder",
+    "subtitle": "Please Enter a Folder",
+    "icon": {"path": "./icon.png"},
+}
+
+
 # 检查应用是否已安装
 def is_app_installed(app_name: str) -> bool:
     if not app_name:
