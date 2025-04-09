@@ -23,25 +23,25 @@ class AlfredItem(TypedDict):
 
 
 def create_item(project: dict, key_app: dict, keyword: str) -> AlfredItem:
-    app_name = key_app[keyword]["app_name"]
-    if not app_name:
-        return NOT_INSTALLED_ITEM
-    else:
-        return {
-            "uid": project["path"],
-            "title": project["name"],
-            "subtitle": project["path"],
-            "arg": project["path"],
-            "variables": {
-                "app_name": app_name,
-                "folder_path": project["path"],
-            },
-            "icon": {"path": key_app[keyword]["icon_path"]},
-        }
+    app_item = key_app[keyword]
+    return {
+        "uid": project["path"],
+        "title": project["name"],
+        "subtitle": project["path"],
+        "arg": project["path"],
+        "variables": {
+            "app_name": app_item["app_name"],
+            "folder_path": project["path"],
+        },
+        "icon": {"path": app_item["icon_path"]},
+    }
 
 
 def main() -> List[Mapping[str, str]]:
     key_app = get_key_app()
+    if keyword not in key_app:
+        json.dump({"items": [NOT_INSTALLED_ITEM]}, sys.stdout)
+        return
     projects = get_projects()
     items = (
         [create_item(project, key_app, keyword) for project in projects]

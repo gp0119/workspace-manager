@@ -6,7 +6,6 @@ import time
 from typing import List
 
 MAX_APP_COUNT = 6
-CACHE_DURATION = 5  # 缓存时间（分钟）
 
 
 NOT_FOUND_PROJECT_ITEM = {
@@ -18,7 +17,7 @@ NOT_FOUND_PROJECT_ITEM = {
 
 NOT_INSTALLED_ITEM = {
     "uid": "no_apps",
-    "title": "No Installed Apps Found",
+    "title": "Not Found Configured Apps",
     "subtitle": "Please Install the Configured Apps",
     "icon": {"path": "./icon.png"},
 }
@@ -138,7 +137,7 @@ def get_cache_path(cache_type: str) -> str:
     return os.path.join(cache_dir, f"{cache_type}.json")
 
 
-def load_cache(cache_type: str) -> tuple[list, float]:
+def load_cache(cache_type: str) -> tuple[any, float]:
     cache_path = get_cache_path(cache_type)
     if not cache_path or not os.path.exists(cache_path):
         return None, 0

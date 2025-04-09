@@ -42,7 +42,7 @@ def render_app_items(key_app: dict, folder_path: str, folder_name: str) -> list:
     return app_items if app_items else [NOT_INSTALLED_ITEM]
 
 
-def refresh_apps() -> list:
+def refresh_apps() -> dict:
     key_app = {}
     for i in range(1, MAX_APP_COUNT + 1):
         key = os.getenv(f"key{i}")
