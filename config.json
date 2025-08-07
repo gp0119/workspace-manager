@@ -37,5 +37,8 @@
   },
   "Cursor": {
     "icon": "cursor"
+  },
+  "GitClient 2025.3 EAP": {
+    "icon": "git"
   }
 }

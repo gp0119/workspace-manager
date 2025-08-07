@@ -1,4 +1,5 @@
 import os
+import sys
 from utils import (
     load_cache,
     save_cache,
@@ -11,6 +12,7 @@ from utils import (
 
 def get_key_app() -> dict:
     cached_key_app, _ = load_cache("key_app")
+    sys.stderr.write(f"cached_key_app: {cached_key_app}\n")
     if cached_key_app:
         return cached_key_app
     else:
