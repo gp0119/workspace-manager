@@ -10,7 +10,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>ADD6CC94-AB5C-443E-8B5E-4A642DECA205</string>
+				<string>69C725F5-2A74-4863-965D-0B8BAD0095F6</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -32,11 +32,48 @@
 				<false/>
 			</dict>
 		</array>
+		<key>69C725F5-2A74-4863-965D-0B8BAD0095F6</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>0FDFEC86-243D-4A13-BEF3-A1A8AA5A584C</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>F87E5E13-7AC1-47F1-B75D-0E344EAF0111</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>0FDFEC86-243D-4A13-BEF3-A1A8AA5A584C</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>49C09086-DA69-45AB-8C62-B90E1A7E9DD4</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>ADD6CC94-AB5C-443E-8B5E-4A642DECA205</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>74F097BE-59FF-4270-A630-B11F15101E1A</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>ADD6CC94-AB5C-443E-8B5E-4A642DECA205</string>
+				<string>69C725F5-2A74-4863-965D-0B8BAD0095F6</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -92,7 +129,7 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>ADD6CC94-AB5C-443E-8B5E-4A642DECA205</string>
+				<string>69C725F5-2A74-4863-965D-0B8BAD0095F6</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -179,6 +216,19 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>path</key>
+				<string>{query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.browseinterminal</string>
+			<key>uid</key>
+			<string>0FDFEC86-243D-4A13-BEF3-A1A8AA5A584C</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>availableviaurlhandler</key>
 				<true/>
 				<key>triggerid</key>
@@ -239,6 +289,52 @@
 			<string>2D37A8A5-AECA-4276-8AC7-53A32624B417</string>
 			<key>version</key>
 			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>conditions</key>
+				<array>
+					<dict>
+						<key>inputstring</key>
+						<string>{var:app_name}</string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>0</integer>
+						<key>matchstring</key>
+						<string>warp</string>
+						<key>outputlabel</key>
+						<string></string>
+						<key>uid</key>
+						<string>F87E5E13-7AC1-47F1-B75D-0E344EAF0111</string>
+					</dict>
+					<dict>
+						<key>inputstring</key>
+						<string>{var:app_name}</string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>0</integer>
+						<key>matchstring</key>
+						<string>item2</string>
+						<key>outputlabel</key>
+						<string></string>
+						<key>uid</key>
+						<string>49C09086-DA69-45AB-8C62-B90E1A7E9DD4</string>
+					</dict>
+				</array>
+				<key>elselabel</key>
+				<string>else</string>
+				<key>hideelse</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.conditional</string>
+			<key>uid</key>
+			<string>69C725F5-2A74-4863-965D-0B8BAD0095F6</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -424,6 +520,13 @@ The workflow includes icons for:
 - RustRover</string>
 	<key>uidata</key>
 	<dict>
+		<key>0FDFEC86-243D-4A13-BEF3-A1A8AA5A584C</key>
+		<dict>
+			<key>xpos</key>
+			<real>860</real>
+			<key>ypos</key>
+			<real>405</real>
+		</dict>
 		<key>2D37A8A5-AECA-4276-8AC7-53A32624B417</key>
 		<dict>
 			<key>xpos</key>
@@ -445,6 +548,13 @@ The workflow includes icons for:
 			<key>ypos</key>
 			<real>760</real>
 		</dict>
+		<key>69C725F5-2A74-4863-965D-0B8BAD0095F6</key>
+		<dict>
+			<key>xpos</key>
+			<real>705</real>
+			<key>ypos</key>
+			<real>440</real>
+		</dict>
 		<key>74F097BE-59FF-4270-A630-B11F15101E1A</key>
 		<dict>
 			<key>xpos</key>
@@ -462,9 +572,9 @@ The workflow includes icons for:
 		<key>ADD6CC94-AB5C-443E-8B5E-4A642DECA205</key>
 		<dict>
 			<key>xpos</key>
-			<real>785</real>
+			<real>865</real>
 			<key>ypos</key>
-			<real>415</real>
+			<real>565</real>
 		</dict>
 		<key>C8F71183-39A6-4E9A-B220-5B527E7F2D48</key>
 		<dict>

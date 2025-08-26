@@ -40,5 +40,8 @@
   },
   "GitClient 2025.3 EAP": {
     "icon": "git"
+  },
+  "Warp": {
+    "icon": "warp"
   }
 }
