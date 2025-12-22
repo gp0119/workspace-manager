@@ -2,7 +2,8 @@ import os
 import sys
 from typing import List, Mapping, Optional, TypedDict
 import json
-from refresh_projects import get_projects, refresh_projects
+import subprocess
+from refresh_projects import get_projects
 from refresh_apps import get_key_app
 from utils import NOT_FOUND_PROJECT_ITEM, NOT_INSTALLED_ITEM
 
@@ -37,6 +38,20 @@ def create_item(project: dict, key_app: dict, keyword: str) -> AlfredItem:
     }
 
 
+def async_refresh():
+    """后台异步刷新缓存"""
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    refresh_script = os.path.join(script_dir, "refresh.py")
+    # 继承当前环境变量（包含 Alfred workflow 的配置）
+    subprocess.Popen(
+        [sys.executable, refresh_script],
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
+        start_new_session=True,
+        env=os.environ.copy(),
+    )
+
+
 def main() -> List[Mapping[str, str]]:
     key_app = get_key_app()
     if keyword not in key_app:
@@ -50,7 +65,8 @@ def main() -> List[Mapping[str, str]]:
     )
 
     json.dump({"items": items}, sys.stdout)
-    refresh_projects()
+    # 异步刷新缓存，不阻塞返回
+    async_refresh()
 
 
 if __name__ == "__main__":

@@ -37,32 +37,32 @@ NOT_ENTER_FOLDER_ITEM = {
 }
 
 
-# 检查应用是否已安装
+# 检查应用是否已安装（优化版：只检查常见路径，避免慢速 AppleScript）
 def is_app_installed(app_name: str) -> bool:
     if not app_name:
         return False
 
+    # 优先检查常见安装路径，速度快
     common_paths = [
         f"/Applications/{app_name}.app",
         f"{os.path.expanduser('~')}/Applications/{app_name}.app",
+        f"/System/Applications/{app_name}.app",
     ]
 
     for path in common_paths:
         if os.path.exists(path):
-            sys.stderr.write(f"Found app at: {path}\n")
             return True
 
-    script = f"""
-    tell application "System Events"
-        return exists application "{app_name}"
-    end tell
-    """
+    # 使用 mdfind 快速查找（比 AppleScript 快很多）
     try:
-        result = subprocess.check_output(["osascript", "-e", script]).decode().strip()
-        sys.stderr.write(f"AppleScript check result: {result}\n")
-        return result == "true"
-    except Exception as e:
-        sys.stderr.write(f"Error checking app {app_name}: {str(e)}\n")
+        result = subprocess.run(
+            ["mdfind", f"kMDItemKind == 'Application' && kMDItemDisplayName == '{app_name}'"],
+            capture_output=True,
+            text=True,
+            timeout=1,
+        )
+        return bool(result.stdout.strip())
+    except Exception:
         return False
 
 
@@ -137,6 +137,9 @@ def get_cache_path(cache_type: str) -> str:
     return os.path.join(cache_dir, f"{cache_type}.json")
 
 
+CACHE_TTL = 3600  # 缓存有效期（秒）
+
+
 def load_cache(cache_type: str) -> tuple[any, float]:
     cache_path = get_cache_path(cache_type)
     if not cache_path or not os.path.exists(cache_path):
@@ -149,6 +152,11 @@ def load_cache(cache_type: str) -> tuple[any, float]:
     except Exception as e:
         sys.stderr.write(f"Error loading {cache_type} cache: {str(e)}\n")
         return None, 0
+
+
+def is_cache_fresh(timestamp: float) -> bool:
+    """检查缓存是否在有效期内"""
+    return time.time() - timestamp < CACHE_TTL
 
 
 def save_cache(items: list, cache_type: str):

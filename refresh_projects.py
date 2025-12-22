@@ -1,7 +1,7 @@
 import os
 import sys
 from typing import List, Mapping
-from utils import get_folder_paths_from_string, load_cache, save_cache
+from utils import get_folder_paths_from_string, load_cache, save_cache, is_cache_fresh
 
 ws = os.getenv("workspace")
 sys.stderr.write("ws:   " + str(ws) + "\n")
@@ -10,12 +10,13 @@ exclude = exclude.split(",") if exclude else []
 
 
 def get_projects() -> List[Mapping[str, str]]:
-    cached_items, _ = load_cache("projects")
+    """优先返回缓存数据（即使过期），由调用方异步刷新"""
+    cached_items, timestamp = load_cache("projects")
 
     if cached_items:
         return cached_items
-    else:
-        return refresh_projects()
+    # 仅在完全没有缓存时才同步刷新
+    return refresh_projects()
 
 
 def refresh_projects():
