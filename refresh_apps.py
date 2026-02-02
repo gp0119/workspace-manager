@@ -39,6 +39,12 @@ def render_app_items(key_app: dict, folder_path: str, folder_name: str) -> list:
                 },
                 "icon": {"path": app_info["icon_path"]},
                 "arg": folder_path,
+                "mods": {
+                    "cmd": {
+                        "subtitle": f"Copy {folder_path} to clipboard",
+                        "valid": True,
+                    },
+                },
             }
         )
     return app_items if app_items else [NOT_INSTALLED_ITEM]

@@ -18,6 +18,16 @@
 				<key>vitoclose</key>
 				<false/>
 			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>663A8F71-BD10-4E58-AF25-F61E411D5C9C</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string>copy to clioboard</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
 		</array>
 		<key>4D0F98B5-A770-4655-B924-AFA64125CBB4</key>
 		<array>
@@ -78,6 +88,16 @@
 				<integer>0</integer>
 				<key>modifiersubtext</key>
 				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>663A8F71-BD10-4E58-AF25-F61E411D5C9C</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string>copy to clioboard</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -415,6 +435,25 @@ open -nb "$bundle_id"  --args $folder_path</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>autopaste</key>
+				<false/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>663A8F71-BD10-4E58-AF25-F61E411D5C9C</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>argumenttype</key>
 				<integer>1</integer>
 				<key>keyword</key>
@@ -548,6 +587,13 @@ The workflow includes icons for:
 			<key>ypos</key>
 			<real>760</real>
 		</dict>
+		<key>663A8F71-BD10-4E58-AF25-F61E411D5C9C</key>
+		<dict>
+			<key>xpos</key>
+			<real>855</real>
+			<key>ypos</key>
+			<real>730</real>
+		</dict>
 		<key>69C725F5-2A74-4863-965D-0B8BAD0095F6</key>
 		<dict>
 			<key>xpos</key>
@@ -558,7 +604,7 @@ The workflow includes icons for:
 		<key>74F097BE-59FF-4270-A630-B11F15101E1A</key>
 		<dict>
 			<key>xpos</key>
-			<real>250</real>
+			<real>255</real>
 			<key>ypos</key>
 			<real>600</real>
 		</dict>
@@ -572,7 +618,7 @@ The workflow includes icons for:
 		<key>ADD6CC94-AB5C-443E-8B5E-4A642DECA205</key>
 		<dict>
 			<key>xpos</key>
-			<real>865</real>
+			<real>860</real>
 			<key>ypos</key>
 			<real>565</real>
 		</dict>
